@@ -32,7 +32,7 @@ const Buttons = (props) => {
         }
     ]
 
-    return props.number === 100 ? (
+    return props.number === 10 ? (
         reached100.map((item) => (
             <Button
                 action={item.action}
