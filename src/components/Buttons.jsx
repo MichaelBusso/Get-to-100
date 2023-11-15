@@ -16,19 +16,19 @@ const Buttons = (props) => {
     const didntReach100 = [
         {
             action: () => props.setNumber((num) => num + 1),
-            value: '+1'
+            value: '+ 1'
         },
         {
             action: () => props.setNumber((num) => num - 1),
-            value: '-1'
+            value: '- 1'
         },
         {
             action: () => props.setNumber((num) => num * 2),
-            value: '*2'
+            value: '* 2'
         },
         {
             action: () => props.setNumber((num) => Math.floor(num / 2)),
-            value: '/2'
+            value: '/ 2'
         }
     ]
 

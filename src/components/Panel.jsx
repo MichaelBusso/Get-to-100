@@ -4,42 +4,45 @@ import { useState } from "react";
 
 const Panel = () => {
 
-    const names = ['Player 1', 'Player 2', 'Player 3', 'Player 4']
+    const persons = [
+        { name: 'Player 1', index: 0 },
+        { name: 'Player 2', index: 1 },
+        { name: 'Player 3', index: 2 }
+    ]
 
     const [players, setPlayers] = useState([]);
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
 
-    const addPlayersHandler = (e) => {
-        if (!players.includes(e)) {
-            setPlayers([...players, e])
+    const addPlayersHandler = (person) => {
+        if (!players.find((player) => player.name === person.name)) {
+            setPlayers([...players, person])
         }
-    }
-
-    const removePlayersHandler = (e) => {
-        setPlayers(players.filter((player) => player != e))
     }
 
     const moveTurnHandler = () => {
         setCurrentPlayerIndex((currentPlayerIndex + 1) % players.length)
     }
 
+    const removePlayerHandler = (e) => {
+        setPlayers(players.filter((player) => player.name !== e))
+    }
+
     return (
         <div>
-            {names.map((name, index) => (
+            {persons.map((person) => (
                 <Button
-                    action={() => addPlayersHandler(name)}
-                    key={index}
-                    value={name}
+                    action={() => addPlayersHandler(person)}
+                    value={person.name}
                 />
             ))}
-            {players.map((player, index) => (
+            {players.map((player) => (
                 <Gamer
-                    name={player}
-                    index={index}
+                    name={player.name}
+                    index={player.index}
                     scores={[]}
                     currentPlayerIndex={currentPlayerIndex}
                     setCurrentPlayerIndex={moveTurnHandler}
-                    removePlayer={removePlayersHandler}
+                    removePlayer={removePlayerHandler}
                 />
             ))}
         </div>
