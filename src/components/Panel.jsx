@@ -4,36 +4,30 @@ import { useState } from "react";
 
 const Panel = () => {
 
-    const names = ['player_1', 'player_2', 'player_3', 'player_4'];
+    const names = ['Player 1', 'Player 2', 'Player 3', 'Player 4']
 
     const [players, setPlayers] = useState([]);
+    const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
 
-    const changePlayersHandeler = (e) => {
+    const addPlayersHandler = (e) => {
         if (!players.includes(e)) {
             setPlayers([...players, e])
         }
     }
 
+    const removePlayersHandler = (e) => {
+        setPlayers(players.filter((player) => player != e))
+    }
 
-
-    const [selectedOption, setSelectedOption] = useState(players[0]);
-
-    const handleOptionChange = () => {
-        const currentIndex = players.indexOf(selectedOption);
-        const nextIndex = (currentIndex + 1) % players.length;
-        setSelectedOption(players[nextIndex]);
-    };
-
-
-
-
-
+    const moveTurnHandler = () => {
+        setCurrentPlayerIndex((currentPlayerIndex + 1) % players.length)
+    }
 
     return (
         <div>
             {names.map((name, index) => (
                 <Button
-                    action={() => changePlayersHandeler(name)}
+                    action={() => addPlayersHandler(name)}
                     key={index}
                     value={name}
                 />
@@ -41,8 +35,11 @@ const Panel = () => {
             {players.map((player, index) => (
                 <Gamer
                     name={player}
-                    key={index}
+                    index={index}
                     scores={[]}
+                    currentPlayerIndex={currentPlayerIndex}
+                    setCurrentPlayerIndex={moveTurnHandler}
+                    removePlayer={removePlayersHandler}
                 />
             ))}
         </div>

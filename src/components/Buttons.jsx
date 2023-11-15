@@ -4,11 +4,11 @@ const Buttons = (props) => {
 
     const reached100 = [
         {
-            action: () => console.log('New Game'),
+            action: () => props.setNumber('n'),
             value: 'New Game'
         },
         {
-            action: () => console.log('Quit'),
+            action: () => props.setNumber('q'),
             value: 'Quit'
         }
     ];
