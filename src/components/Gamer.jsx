@@ -1,5 +1,5 @@
 import Buttons from "./Buttons";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import './components style/Gamer.css'
 
 const Gamer = (props) => {
@@ -9,18 +9,16 @@ const Gamer = (props) => {
 
     const isCurrentPlayer = (playerIndex) => playerIndex === props.currentPlayerIndex;
 
-    useEffect(() => {
-        if (isCurrentPlayer(props.index) && number === 10) {
-            props.setCurrentPlayerIndex();
-        }
-    })
-
-    const changeNumberHandler = (e) => {
+    const actionHandler = (e) => {
         if (e === 'q') {
-            // props.removePlayer(props.player.name);
+            props.removePlayer(props.player);
         } if (e === 'n') {
-            // props.newGame();
-        } else if (isCurrentPlayer(props.index)) {
+            props.newGame(props.player);
+            if (steps !== 0) {
+                setNumber(Math.floor(Math.random() * 10))
+                setSteps(0)
+            }
+        } else if (isCurrentPlayer(props.index) && props.gameStatus === 2) {
             setNumber(e);
             setSteps(steps + 1);
             props.player.steps = steps + 1;
@@ -32,12 +30,14 @@ const Gamer = (props) => {
 
     return (
         <div className="container">
-            <h3>Gamer: {props.player.name} == {isCurrentPlayer(props.index) ? 'Enabled' : 'Disabled'} == {number === 10 ? 'Finished' : 'In the Game'}</h3>
+            <h3>Gamer: {props.player.name} == {isCurrentPlayer(props.index) && props.gameStatus === 2 ? 'Enabled' : 'Disabled'} == {number === 10 ? 'Finished' : 'In the Game'}</h3>
             <h3>Number: {number}</h3>
-            <h3>Steps: {steps}</h3>
+            {props.gameStatus === 2 && number !== 10 && <h3>Steps: {steps}</h3>}
             <Buttons
+                key={'btns'}
+                gameStatus={props.gameStatus}
                 number={number}
-                setNumber={changeNumberHandler}
+                setNumber={actionHandler}
             />
             <h3>{props.player.name}'s scores: {props.player.scores.join(' , ')}</h3>
         </div>

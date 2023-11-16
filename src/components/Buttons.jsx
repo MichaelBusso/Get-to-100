@@ -32,18 +32,20 @@ const Buttons = (props) => {
         }
     ]
 
-    return props.number === 10 ? (
-        reached100.map((item) => (
+    return props.gameStatus === 3 ? (
+        reached100.map((item, index) => (
             <Button
                 action={item.action}
                 value={item.value}
+                key={index}
             />
         ))
     ) : (
-        didntReach100.map((item) => (
+        didntReach100.map((item, index) => (
             <Button
                 action={item.action}
                 value={item.value}
+                key={index}
             />
         ))
     )
