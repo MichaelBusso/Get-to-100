@@ -54,6 +54,7 @@ const Panel = () => {
     }
 
     const removePlayerHandler = (player) => {
+        setScreenStatus(false);
         setPlayers(players.filter((p) => p !== player))
     }
 
@@ -66,6 +67,7 @@ const Panel = () => {
         if (players.findIndex((p) => p.number !== 0) === -1) {
             setGameStatus(2);
             setCurrentPlayerIndex(0)
+            setScreenStatus(false);
             playersFinishedIndex = [];
         }
     }
