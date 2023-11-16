@@ -66,6 +66,7 @@ const Panel = () => {
         if (players.findIndex((p) => p.number !== 0) === -1) {
             setGameStatus(2);
             setCurrentPlayerIndex(0)
+            playersFinishedIndex = [];
         }
     }
 

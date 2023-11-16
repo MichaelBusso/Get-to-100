@@ -6,6 +6,10 @@
     padding: 10px;
 }
 
+.container span {
+  color: red;
+}
+
 .container button {
     display: inline-block;
     width: 200px;
