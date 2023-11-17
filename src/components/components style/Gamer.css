@@ -1,13 +1,18 @@
 .container {
-    width: 450px;
+    width: 550px;
     margin: 20px auto;
     background-color: antiquewhite;
     border-radius: 5px;
     padding: 10px;
+    display: inline-block;
 }
 
-.container span {
+.container .enable {
   color: red;
+}
+
+.container .finished {
+  color: green;
 }
 
 .container button {

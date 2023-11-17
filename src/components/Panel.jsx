@@ -76,34 +76,41 @@ const Panel = () => {
         <div>
             {screenStatus &&
                 <Screen players={players} winners={playersFinishedIndex} />}
-            {gameStatus === 1 &&
-                persons.map((person, index) => (
-                    <Button
-                        action={() => addPlayersHandler(person, index)}
-                        value={person.name}
+
+            <div className="panelButtonsContainer">
+                {gameStatus === 1 &&
+                    persons.map((person, index) => (
+                        <Button
+                            action={() => addPlayersHandler(person, index)}
+                            value={person.name}
+                            key={index}
+                        />
+                    ))}
+                {gameStatus === 1 && players.length > 0 &&
+                    < Button
+                        action={gameStartedHandler}
+                        value={'Start'}
+
+                    />
+                }
+            </div>
+
+            <div className="panelGamersContainer">
+                {players.map((player, index) => (
+                    <Gamer
+                        player={player}
+                        index={index}
                         key={index}
+                        gameStatus={gameStatus}
+                        changeDetails={changePlayerDetailsHandler}
+                        currentPlayerIndex={currentPlayerIndex}
+                        setCurrentPlayerIndex={moveTurnHandler}
+                        newGame={newGameHandler}
+                        removePlayer={removePlayerHandler}
                     />
                 ))}
-            {gameStatus === 1 && players.length > 0 &&
-                < Button
-                    action={gameStartedHandler}
-                    value={'Start'}
+            </div>
 
-                />
-            }
-            {players.map((player, index) => (
-                <Gamer
-                    player={player}
-                    index={index}
-                    key={index}
-                    gameStatus={gameStatus}
-                    changeDetails={changePlayerDetailsHandler}
-                    currentPlayerIndex={currentPlayerIndex}
-                    setCurrentPlayerIndex={moveTurnHandler}
-                    newGame={newGameHandler}
-                    removePlayer={removePlayerHandler}
-                />
-            ))}
         </div>
 
     )

@@ -29,8 +29,8 @@ const Gamer = (props) => {
     }
 
     return (
-        <div className="container">
-            <h3>Gamer: {props.player.name} == {isCurrentPlayer(props.index) && props.gameStatus === 2 ? <span>Enabled</span> : 'Disabled'} == {number === 10 ? 'Finished' : 'In the Game'}</h3>
+        <div className='container'>
+            <h3>Gamer: {props.player.name} == {isCurrentPlayer(props.index) && props.gameStatus === 2 ? <span className="enable">Enabled</span> : 'Disabled'} == {number === 10 ? <span className="finished">Finished</span> : 'In the Game'}</h3>
             <h3>Number: {number}</h3>
             {props.gameStatus === 2 && number !== 10 && <h3>Steps: {steps}</h3>}
             <Buttons
