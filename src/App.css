@@ -6,16 +6,28 @@
   display: block;
 }
 
+.startButton button{
+  background-color:rgb(255, 0, 0);
+  border: none;
+  font-size: X-large;
+  width: 150px;
+  border-radius: 20px;
+}
+
+.startButton button:hover {
+  background-color: rgb(235, 71, 71);
+}
+
 .panelGamersContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 }
 
 button {
   display: inline-block;
-  width: 100px;
+  min-width: 100px;
   height: 40px;
   line-height: 40px;
   margin: 20px 2px;

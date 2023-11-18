@@ -7,12 +7,12 @@ let playersFinishedIndex = [];
 
 const Panel = () => {
 
-    const persons = [
-        { name: 'Player 1', scores: [] },
-        { name: 'Player 2', scores: [] },
-        { name: 'Player 3', scores: [] },
-        { name: 'Player 4', scores: [] }
-    ]
+    const getFromLocalStorage = (key) => {
+        const storedData = localStorage.getItem(key);
+        return storedData ? JSON.parse(storedData) : null;
+    };
+
+    const persons = getFromLocalStorage('users');
 
     const [players, setPlayers] = useState([]);
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
@@ -29,6 +29,13 @@ const Panel = () => {
         }
     }
 
+    const setPlayerToLocalStorage = (player) => {
+        const usersStorgae = JSON.parse(localStorage.getItem('users'));
+        const user = usersStorgae.find(user => user.name === player.name);
+        user.scores.push(player.steps);
+        localStorage.setItem('users', JSON.stringify(usersStorgae));
+    }
+
     const changePlayerDetailsHandler = (player) => {
         let newArray = [...players];
         const index = newArray.findIndex((p) => p.name === player.name);
@@ -36,6 +43,7 @@ const Panel = () => {
         if (player.number === 10) {
             newArray[index].scores.push(player.steps);
             playersFinishedIndex.push(index);
+            setPlayerToLocalStorage(player);
             if (playersFinishedIndex.length === players.length) {
                 setGameStatus(3);
                 setScreenStatus(true);
@@ -76,7 +84,6 @@ const Panel = () => {
         <div>
             {screenStatus &&
                 <Screen players={players} winners={playersFinishedIndex} />}
-
             <div className="panelButtonsContainer">
                 {gameStatus === 1 &&
                     persons.map((person, index) => (
@@ -87,14 +94,15 @@ const Panel = () => {
                         />
                     ))}
                 {gameStatus === 1 && players.length > 0 &&
-                    < Button
-                        action={gameStartedHandler}
-                        value={'Start'}
+                    <div className="startButton">
+                        <Button
+                            action={gameStartedHandler}
+                            value={'Start'}
+                        />
+                    </div>
 
-                    />
                 }
             </div>
-
             <div className="panelGamersContainer">
                 {players.map((player, index) => (
                     <Gamer
@@ -110,7 +118,6 @@ const Panel = () => {
                     />
                 ))}
             </div>
-
         </div>
 
     )

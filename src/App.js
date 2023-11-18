@@ -1,10 +1,11 @@
-import Panel from './components/Panel';
+import Linking from './components/Linking';
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Panel />
+      <Linking />
     </div>
   );
 }

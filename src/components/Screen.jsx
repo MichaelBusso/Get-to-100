@@ -9,9 +9,9 @@ const Screen = (props) => {
     }
 
     return (
-        <div className='container'>
+        <div className='container' key='screenComtainer'>
             {winnersToShow.map((winner, index) => (
-                <h2>{index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'} : {winner.name} in {winner.steps} steps</h2>
+                <h2 key={index}>{index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'} : {winner.name} in {winner.steps} steps</h2>
             ))}
         </div>
     )
