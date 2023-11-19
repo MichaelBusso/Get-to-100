@@ -1,5 +1,5 @@
-.container {
-    width: 450px;
+.screenContainer {
+    width: 100%;
     margin: 20px auto;
     background-color: antiquewhite;
     border-radius: 5px;

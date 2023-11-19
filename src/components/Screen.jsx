@@ -9,7 +9,7 @@ const Screen = (props) => {
     }
 
     return (
-        <div className='container' key='screenComtainer'>
+        <div className='screenContainer' key='screenComtainer'>
             {winnersToShow.map((winner, index) => (
                 <h2 key={index}>{index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'} : {winner.name} in {winner.steps} steps</h2>
             ))}

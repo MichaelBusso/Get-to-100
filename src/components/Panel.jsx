@@ -12,7 +12,7 @@ const Panel = () => {
         return storedData ? JSON.parse(storedData) : null;
     };
 
-    const persons = getFromLocalStorage('users');
+    const users = getFromLocalStorage('users');
 
     const [players, setPlayers] = useState([]);
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
@@ -23,9 +23,9 @@ const Panel = () => {
         setGameStatus(2);
     }
 
-    const addPlayersHandler = (person, index) => {
-        if (!players.find((player) => player.name === person.name)) {
-            setPlayers([...players, { ...person, index }])
+    const addPlayersHandler = (user, index) => {
+        if (!players.find((player) => player.name === user.name)) {
+            setPlayers([...players, { ...user, index }])
         }
     }
 
@@ -86,7 +86,7 @@ const Panel = () => {
                 <Screen players={players} winners={playersFinishedIndex} />}
             <div className="panelButtonsContainer">
                 {gameStatus === 1 &&
-                    persons.map((person, index) => (
+                    users.map((person, index) => (
                         <Button
                             action={() => addPlayersHandler(person, index)}
                             value={person.name}

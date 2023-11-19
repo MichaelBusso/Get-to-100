@@ -44,9 +44,23 @@ const Login = (props) => {
                     value='Login'
                 />
             }
-            {getFromLocalStorage('users').map((user, index) => (
-                <p key={`loginContainer_ ${index}`}>Name: {user.name}, Scores: {user.scores.join(' , ')}</p>
-            ))}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Scores</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {getFromLocalStorage('users').map((user, index) => (
+                        <tr key={`loginContainer_ ${index}`} className={index % 2 === 0 ? 'even' : 'odd'}>
+                            <td>{user.name}</td>
+                            <td>{user.scores.join(' , ')}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
         </div>
     );
 };
