@@ -1,6 +1,6 @@
 import Button from './Button';
 import './components style/Login.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Login = (props) => {
 
@@ -16,6 +16,12 @@ const Login = (props) => {
         return storedData ? JSON.parse(storedData) : [];
     };
 
+    useEffect(() => {
+        let storage = getFromLocalStorage('users');
+        let storageLangth = storage.length;
+        storageLangth > 0 && setStorageStatus(true);
+    })
+
     const singUpHandler = () => {
         if (name === '') {
             return alert('Invalid name!');
@@ -28,7 +34,6 @@ const Login = (props) => {
         users.push({ name: name, scores: [] });
         localStorage.setItem('users', JSON.stringify(users));
         setName('');
-        setStorageStatus(true)
     };
 
     return (
@@ -44,22 +49,25 @@ const Login = (props) => {
                     value='Login'
                 />
             }
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Scores</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {getFromLocalStorage('users').map((user, index) => (
-                        <tr key={`loginContainer_ ${index}`} className={index % 2 === 0 ? 'even' : 'odd'}>
-                            <td>{user.name}</td>
-                            <td>{user.scores.join(' , ')}</td>
+            {storageStatus &&
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Scores</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {getFromLocalStorage('users').map((user, index) => (
+                            <tr key={`loginContainer_ ${index}`} className={index % 2 === 0 ? 'even' : 'odd'}>
+                                <td>{user.name}</td>
+                                <td>{user.scores.join(' , ')}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            }
+
 
         </div>
     );

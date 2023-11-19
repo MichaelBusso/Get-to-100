@@ -1,8 +1,12 @@
 .loginContainer {
     display: flexbox;
     align-items: center;
-    margin: 20px;
-    border: 1px solid red;
+    margin: 20px auto;
+    padding: 30px;
+    width: 80%;
+    border-radius: 10px;
+    background-color: rgb(227, 210, 210);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 input {
@@ -23,7 +27,7 @@ table {
 }
 
 th {
-    background-color:#3498db;
+    background-color: #3498db;
     font-style: italic;
     color: #fff;
 }
@@ -34,9 +38,13 @@ th {
     height: 20px;
     min-width: 100px;
     padding: 8px;
+    font-weight: bold;
 }
 
 .even {
-    background-color:bisque;
+    background-color: rgb(250, 219, 181);
 }
 
+.odd {
+    background-color: antiquewhite;
+}

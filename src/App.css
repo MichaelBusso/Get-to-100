@@ -4,10 +4,15 @@
 
 .panelButtonsContainer {
   display: block;
+  margin: 20px auto;
+  width: 80%;
+  border-radius: 10px;
+  background-color: rgb(227, 210, 210);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-.startButton button{
-  background-color:rgb(255, 0, 0);
+.startButton button {
+  background-color: rgb(255, 0, 0);
   border: none;
   font-size: X-large;
   width: 150px;
@@ -23,6 +28,11 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  margin: 20px auto;
+  width: 80%;
+  border-radius: 10px;
+  background-color: rgb(227, 210, 210);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 button {
