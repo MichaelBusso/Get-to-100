@@ -41,7 +41,7 @@ const Login = (props) => {
             <input type="text" value={name} onChange={handleInputChange} placeholder='Name' />
             <Button
                 action={singUpHandler}
-                value='Sing-Up'
+                value='Sign-Up'
             />
             {storageStatus &&
                 <Button
