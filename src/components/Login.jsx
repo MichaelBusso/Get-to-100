@@ -67,10 +67,8 @@ const Login = (props) => {
                     </tbody>
                 </table>
             }
-
-
         </div>
-    );
-};
+    )
+}
 
 export default Login;

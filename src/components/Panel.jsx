@@ -40,7 +40,7 @@ const Panel = () => {
         let newArray = [...players];
         const index = newArray.findIndex((p) => p.name === player.name);
         newArray[index] = player;
-        if (player.number === 10) {
+        if (player.number === 100) {
             newArray[index].scores.push(player.steps);
             playersFinishedIndex.push(index);
             setPlayerToLocalStorage(player);
@@ -100,7 +100,6 @@ const Panel = () => {
                             value={'Start'}
                         />
                     </div>
-
                 }
             </div>
             <div className="panelGamersContainer">
@@ -119,7 +118,6 @@ const Panel = () => {
                 ))}
             </div>
         </div>
-
     )
 }
 

@@ -6,7 +6,7 @@ const Linking = () => {
     const [login, setLogin] = useState(false);
 
     const loginHandler = () => {
-        setLogin(true)
+        setLogin(true);
     }
 
     return (
@@ -16,7 +16,6 @@ const Linking = () => {
                 <Login setLogin={loginHandler} />
             }
         </div>
-
     )
 }
 

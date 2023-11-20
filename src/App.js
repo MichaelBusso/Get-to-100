@@ -1,5 +1,4 @@
 import Linking from './components/Linking';
-
 import './App.css';
 
 function App() {

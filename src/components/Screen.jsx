@@ -5,7 +5,7 @@ const Screen = (props) => {
     let winnersToShow = [];
 
     for (let i = 0; i < Math.min(3, props.winners.length); i++) {
-        winnersToShow.push(props.players[props.winners[i]])
+        winnersToShow.push(props.players[props.winners[i]]);
     }
 
     const getFromLocalStorage = (key) => {
@@ -22,7 +22,7 @@ const Screen = (props) => {
             sum += user.scores[i];
         }
         average.push({ name: user.name, average: (sum / i).toFixed(2) });
-    })
+    });
 
     average.sort((usser1, user2) => usser1.average - user2.average);
     let topAverage = [];
@@ -45,7 +45,6 @@ const Screen = (props) => {
                 ))}
             </div>
         </div>
-
     )
 }
 

@@ -49,7 +49,6 @@ const Buttons = (props) => {
             />
         ))
     )
-
 }
 
 export default Buttons;
