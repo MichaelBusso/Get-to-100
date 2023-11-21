@@ -1,72 +1,71 @@
 import Button from './Button';
 import './components style/Login.css';
-import React, { useState, useEffect } from 'react';
+import { FaPlus } from "react-icons/fa";
+import React, { useState } from 'react';
 
-const Login = (props) => {
+const Login = ({ setLogin, gamePlayers }) => {
 
-    const [name, setName] = useState('');
-    const [storageStatus, setStorageStatus] = useState(false);
-
-    const handleInputChange = (event) => {
-        setName(event.target.value);
-    };
+    const joinsTheGameHandler = (player) => {
+        if(!player.inGame) {
+            gamePlayers.push(player);
+        }
+        else {
+            gamePlayers.filter((gamePlayer) => gamePlayer.name !== player.name)
+        } 
+        player.name = !player.name;
+    }
 
     const getFromLocalStorage = (key) => {
         const storedData = localStorage.getItem(key);
         return storedData ? JSON.parse(storedData) : [];
     };
 
-    useEffect(() => {
-        let storage = getFromLocalStorage('users');
-        let storageLangth = storage.length;
-        storageLangth > 0 && setStorageStatus(true);
-    })
+    const [name, setName] = useState('');
+    const [users, setUsers] = useState(getFromLocalStorage('users'));
 
-    const singUpHandler = () => {
+    const inputChangeHandler = (event) => {
+        setName(event.target.value);
+    };
+
+    const addHandler = () => {
         if (name === '') {
             return alert('Invalid name!');
         }
-        let users = getFromLocalStorage('users');
-        if (users.find((user) => user.name === name)) {
-            setName('');
+        let myUsers = getFromLocalStorage('users');
+        if (myUsers.find((user) => user.name === name)) {
             return alert('User already exist!');
         }
-        users.push({ name: name, scores: [] });
-        localStorage.setItem('users', JSON.stringify(users));
+        myUsers.push({ name: name, scores: [], index: users.length, inGame: false });
+        localStorage.setItem('users', JSON.stringify(myUsers));
+        setUsers(myUsers);
         setName('');
     };
 
     return (
         <div className='loginContainer'>
-            <input type="text" value={name} onChange={handleInputChange} placeholder='Name' />
-            <Button
-                action={singUpHandler}
-                value='Sign-Up'
+            <input
+                type="text"
+                value={name}
+                onChange={inputChangeHandler}
+                placeholder='Name'
             />
-            {storageStatus &&
-                <Button
-                    action={props.setLogin}
-                    value='Login'
-                />
-            }
-            {storageStatus &&
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Scores</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {getFromLocalStorage('users').map((user, index) => (
-                            <tr key={`loginContainer_ ${index}`} className={index % 2 === 0 ? 'even' : 'odd'}>
-                                <td>{user.name}</td>
-                                <td>{user.scores.join(' , ')}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            }
+            <Button
+                action={addHandler}
+                value={<FaPlus />}
+            />
+            <Button
+                action={setLogin}
+                value='Start Game'
+            />
+            {users.map((user) => {
+                <div
+                    id={user.index}
+                    onClick={(user) => joinsTheGameHandler(user)}
+                >
+                    <h3>{user.name}</h3>
+                    <p>{user.scores}</p>
+                </div>
+            })}
         </div>
     )
 }

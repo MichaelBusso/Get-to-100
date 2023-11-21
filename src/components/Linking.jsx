@@ -9,11 +9,16 @@ const Linking = () => {
         setLogin(true);
     }
 
+    let gamePlayers = [];
+
     return (
         <div>
             {login ?
-                <Panel /> :
-                <Login setLogin={loginHandler} />
+                <Panel players={gamePlayers}/> :
+                <Login
+                    setLogin={loginHandler}
+                    gamePlayers={gamePlayers}
+                />
             }
         </div>
     )

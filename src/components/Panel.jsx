@@ -23,9 +23,9 @@ const Panel = () => {
         setGameStatus(2);
     }
 
-    const addPlayersHandler = (user, index) => {
+    const addPlayersHandler = (user) => {
         if (!players.find((player) => player.name === user.name)) {
-            setPlayers([...players, { ...user, index }])
+            setPlayers([...players, { ...user, index: players.length, number: Math.floor(Math.random() * 100), steps: 0, inGame: true }])
         }
     }
 
@@ -88,7 +88,7 @@ const Panel = () => {
                 {gameStatus === 1 &&
                     users.map((person, index) => (
                         <Button
-                            action={() => addPlayersHandler(person, index)}
+                            action={() => addPlayersHandler(person)}
                             value={person.name}
                             key={index}
                         />
