@@ -2,21 +2,20 @@ import Panel from "./Panel";
 import Login from "./Login";
 import { useState } from "react";
 
-const Linking = () => {
-    const [login, setLogin] = useState(false);
+const Linking = ({ gamePlayers }) => {
 
-    const loginHandler = () => {
-        setLogin(true);
+    const [gameStarted, setGameStarted] = useState(false);
+
+    const startHandler = () => {
+        setGameStarted(true);
     }
-
-    let gamePlayers = [];
 
     return (
         <div>
-            {login ?
-                <Panel players={gamePlayers}/> :
+            {gameStarted ?
+                <Panel players={gamePlayers} /> :
                 <Login
-                    setLogin={loginHandler}
+                    setGameStarted={startHandler}
                     gamePlayers={gamePlayers}
                 />
             }

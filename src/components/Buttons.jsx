@@ -1,45 +1,28 @@
 import Button from "./Button";
 
-const Buttons = (props) => {
-
-    const reached100 = [
-        {
-            action: () => props.setNumber('n'),
-            value: 'New Game'
-        },
-        {
-            action: () => props.setNumber('q'),
-            value: 'Quit'
-        }
-    ];
+const Buttons = ({ currentNumber, doSomeAction }) => {
 
     const didntReach100 = [
         {
-            action: () => props.setNumber((num) => num + 1),
+            action: () => doSomeAction((num) => num + 1),
             value: '+ 1'
         },
         {
-            action: () => props.setNumber((num) => num - 1),
+            action: () => doSomeAction((num) => num - 1),
             value: '- 1'
         },
         {
-            action: () => props.setNumber((num) => num * 2),
+            action: () => doSomeAction((num) => num * 2),
             value: '* 2'
         },
         {
-            action: () => props.setNumber((num) => Math.floor(num / 2)),
+            action: () => doSomeAction((num) => Math.floor(num / 2)),
             value: '/ 2'
         }
-    ]
+    ];
 
-    return props.gameStatus === 3 ? (
-        reached100.map((item, index) => (
-            <Button
-                action={item.action}
-                value={item.value}
-                key={index}
-            />
-        ))
+    return currentNumber === 10 ? (
+        <h2>Wait for the end of the game to join the next round!</h2>
     ) : (
         didntReach100.map((item, index) => (
             <Button

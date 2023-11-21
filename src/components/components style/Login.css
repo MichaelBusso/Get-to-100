@@ -20,31 +20,8 @@ input {
     box-sizing: border-box;
 }
 
-table {
-    border-collapse: collapse;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-th {
-    background-color: #3498db;
-    font-style: italic;
-    color: #fff;
-}
-
-td,
-th {
-    border: 1px solid;
-    height: 20px;
-    min-width: 100px;
-    padding: 8px;
-    font-weight: bold;
-}
-
-.even {
-    background-color: rgb(250, 219, 181);
-}
-
-.odd {
-    background-color: antiquewhite;
+.playerContainer {
+    width: 200px;
+    height: 200px;
+    background-color: aqua;
 }

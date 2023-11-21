@@ -3,29 +3,33 @@ import './components style/Login.css';
 import { FaPlus } from "react-icons/fa";
 import React, { useState } from 'react';
 
-const Login = ({ setLogin, gamePlayers }) => {
+const Login = ({ setGameStarted, gamePlayers }) => {
 
     const joinsTheGameHandler = (player) => {
-        if(!player.inGame) {
+        if (!player.inGame) {
+            player.index = gamePlayers.length;
+            player.number = Math.floor(Math.random() * 10);
+            player.steps = 0;
             gamePlayers.push(player);
         }
         else {
-            gamePlayers.filter((gamePlayer) => gamePlayer.name !== player.name)
-        } 
-        player.name = !player.name;
+            gamePlayers = gamePlayers.filter((gamePlayer) => gamePlayer.name !== player.name);
+        }
+        player.inGame = !player.inGame;
+        console.log(gamePlayers);
     }
 
     const getFromLocalStorage = (key) => {
         const storedData = localStorage.getItem(key);
         return storedData ? JSON.parse(storedData) : [];
-    };
+    }
 
     const [name, setName] = useState('');
     const [users, setUsers] = useState(getFromLocalStorage('users'));
 
     const inputChangeHandler = (event) => {
         setName(event.target.value);
-    };
+    }
 
     const addHandler = () => {
         if (name === '') {
@@ -35,11 +39,11 @@ const Login = ({ setLogin, gamePlayers }) => {
         if (myUsers.find((user) => user.name === name)) {
             return alert('User already exist!');
         }
-        myUsers.push({ name: name, scores: [], index: users.length, inGame: false });
+        myUsers.push({ name: name, scores: [], id: users.length, inGame: false });
         localStorage.setItem('users', JSON.stringify(myUsers));
         setUsers(myUsers);
         setName('');
-    };
+    }
 
     return (
         <div className='loginContainer'>
@@ -54,18 +58,18 @@ const Login = ({ setLogin, gamePlayers }) => {
                 value={<FaPlus />}
             />
             <Button
-                action={setLogin}
+                action={setGameStarted}
                 value='Start Game'
             />
-            {users.map((user) => {
-                <div
+            {users.map((user) => (
+                <div className='playerContainer'
                     id={user.index}
-                    onClick={(user) => joinsTheGameHandler(user)}
+                    onClick={() => joinsTheGameHandler(user)}
                 >
                     <h3>{user.name}</h3>
-                    <p>{user.scores}</p>
+                    <p>{user.scores.join(' , ')}</p>
                 </div>
-            })}
+            ))}
         </div>
     )
 }
