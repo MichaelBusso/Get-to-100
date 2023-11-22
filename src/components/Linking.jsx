@@ -7,13 +7,16 @@ const Linking = ({ gamePlayers }) => {
     const [gameStarted, setGameStarted] = useState(false);
 
     const startHandler = () => {
-        setGameStarted(true);
+        setGameStarted(!gameStarted);
     }
 
     return (
         <div>
             {gameStarted ?
-                <Panel players={gamePlayers} /> :
+                <Panel
+                    players={gamePlayers}
+                    setGameStarted={startHandler}
+                /> :
                 <Login
                     setGameStarted={startHandler}
                     gamePlayers={gamePlayers}

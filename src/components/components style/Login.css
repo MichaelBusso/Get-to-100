@@ -9,6 +9,14 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
+.loginUsersContainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
 input {
     padding: 12px;
     margin: 20px auto;
@@ -21,7 +29,16 @@ input {
 }
 
 .playerContainer {
-    width: 200px;
-    height: 200px;
-    background-color: aqua;
+    width: 30%;
+    height: auto;
+    background-color: brown;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    user-select: none;
+}
+
+.playerContainer:hover {
+    cursor: pointer;
+    opacity: 0.8;
 }

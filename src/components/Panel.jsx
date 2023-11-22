@@ -1,7 +1,7 @@
 import Gamer from "./Gamer";
 import { useState } from "react";
 
-const Panel = ({ players }) => {
+const Panel = ({ setGameStarted, players }) => {
 
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
 
@@ -15,10 +15,21 @@ const Panel = ({ players }) => {
         gameModeChecker();
     }
 
+    const setPlayerToLocalStorage = (player) => {
+        const usersStorgae = JSON.parse(localStorage.getItem('users'));
+        const index = usersStorgae.findIndex(user => user.name === player.name);
+        usersStorgae[index] = player;
+        localStorage.setItem('users', JSON.stringify(usersStorgae));
+    }
+
     const gameModeChecker = () => {
         if (!players.some((obj) => obj.inGame === true)) {
-            localStorage.setItem('users', JSON.stringify(players));
-            setTimeout(() => alert('Game Over!!!'), 500);
+            players.forEach((player) => setPlayerToLocalStorage(player));
+            setTimeout(() => {
+                alert('Game Over!!!');
+                players.length = 0;
+                setGameStarted();
+            }, 100);
         }
     }
 

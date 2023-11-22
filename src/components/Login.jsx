@@ -61,15 +61,19 @@ const Login = ({ setGameStarted, gamePlayers }) => {
                 action={setGameStarted}
                 value='Start Game'
             />
-            {users.map((user) => (
+            <div className='loginUsersContainer'>
+                {users.map((user, index) => (
                 <div className='playerContainer'
                     id={user.index}
+                    key={index}
                     onClick={() => joinsTheGameHandler(user)}
                 >
                     <h3>{user.name}</h3>
                     <p>{user.scores.join(' , ')}</p>
                 </div>
             ))}
+            </div>
+            
         </div>
     )
 }
