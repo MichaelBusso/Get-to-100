@@ -14,6 +14,7 @@ const Login = ({ setGameStarted, gamePlayers }) => {
         }
         else {
             gamePlayers = gamePlayers.filter((gamePlayer) => gamePlayer.name !== player.name);
+            gamePlayers.forEach((player, index) => player.index = index);
         }
         player.inGame = !player.inGame;
         console.log(gamePlayers);
@@ -63,17 +64,17 @@ const Login = ({ setGameStarted, gamePlayers }) => {
             />
             <div className='loginUsersContainer'>
                 {users.map((user, index) => (
-                <div className='playerContainer'
-                    id={user.index}
-                    key={index}
-                    onClick={() => joinsTheGameHandler(user)}
-                >
-                    <h3>{user.name}</h3>
-                    <p>{user.scores.join(' , ')}</p>
-                </div>
-            ))}
+                    <div className='playerContainer'
+                        id={user.index}
+                        key={index}
+                        onClick={() => joinsTheGameHandler(user)}
+                    >
+                        <h3>{user.name}</h3>
+                        <p>{user.scores.join(' , ')}</p>
+                    </div>
+                ))}
             </div>
-            
+
         </div>
     )
 }
