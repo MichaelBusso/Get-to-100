@@ -11,12 +11,12 @@ const Login = ({ setGameStarted, gamePlayers }) => {
             player.number = Math.floor(Math.random() * 10);
             player.steps = 0;
             gamePlayers.push(player);
+            player.inGame = !player.inGame;
         }
-        else {
-            gamePlayers = gamePlayers.filter((gamePlayer) => gamePlayer.name !== player.name);
-            gamePlayers.forEach((player, index) => player.index = index);
-        }
-        player.inGame = !player.inGame;
+        // else {
+        //     gamePlayers = gamePlayers.filter((gamePlayer) => gamePlayer.name !== player.name);
+        //     gamePlayers.forEach((player, index) => player.index = index);
+        // }
         console.log(gamePlayers);
     }
 
