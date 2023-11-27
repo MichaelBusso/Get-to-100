@@ -28,9 +28,10 @@ input {
     box-sizing: border-box;
 }
 
-.playerContainer {
+.playerContainer,
+.addPlayerButton {
     width: 30%;
-    height: auto;
+    min-height: 100px;
     background-color: brown;
     color: #fff;
     border-radius: 10px;
@@ -38,7 +39,15 @@ input {
     user-select: none;
 }
 
-.playerContainer:hover {
+.addPlayerButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+
+.playerContainer:hover,
+.addPlayerButton:hover {
     cursor: pointer;
     opacity: 0.8;
 }

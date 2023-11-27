@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 const Login = ({ setGameStarted, gamePlayers }) => {
 
-    const joinsTheGameHandler = (player) => {
+    const joinsTheGameHandler = (player, e) => {
         if (!player.inGame) {
             player.index = gamePlayers.length;
             player.number = Math.floor(Math.random() * 10);
@@ -25,14 +25,10 @@ const Login = ({ setGameStarted, gamePlayers }) => {
         return storedData ? JSON.parse(storedData) : [];
     }
 
-    const [name, setName] = useState('');
     const [users, setUsers] = useState(getFromLocalStorage('users'));
 
-    const inputChangeHandler = (event) => {
-        setName(event.target.value);
-    }
-
     const addHandler = () => {
+        const name = prompt('Enter new user name')
         if (name === '') {
             return alert('Invalid name!');
         }
@@ -43,21 +39,10 @@ const Login = ({ setGameStarted, gamePlayers }) => {
         myUsers.push({ name: name, scores: [], id: users.length, inGame: false });
         localStorage.setItem('users', JSON.stringify(myUsers));
         setUsers(myUsers);
-        setName('');
     }
 
     return (
         <div className='loginContainer'>
-            <input
-                type="text"
-                value={name}
-                onChange={inputChangeHandler}
-                placeholder='Name'
-            />
-            <Button
-                action={addHandler}
-                value={<FaPlus />}
-            />
             <Button
                 action={setGameStarted}
                 value='Start Game'
@@ -73,8 +58,10 @@ const Login = ({ setGameStarted, gamePlayers }) => {
                         <p>{user.scores.join(' , ')}</p>
                     </div>
                 ))}
+                <div className='addPlayerButton' onClick={addHandler}>
+                    <FaPlus />
+                </div>
             </div>
-
         </div>
     )
 }
